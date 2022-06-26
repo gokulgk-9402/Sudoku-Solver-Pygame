@@ -24,6 +24,7 @@ grid = [[0 for _ in range(9)] for _ in range(9)]
 
 initial = [[0 for _ in range(9)] for _ in range(9)]
 user = [[0 for _ in range(9)] for _ in range(9)]
+solution = [[0 for _ in range(9)] for _ in range(9)]
 
 def import_puzzle():
     with open("data.txt", "r") as f:
@@ -34,6 +35,7 @@ def import_puzzle():
         line = line.split()
         for j, ele in enumerate(line):
             grid[i][j] = int(ele)
+            solution[i][j] = int(ele)
 
     for i in range(9):
         for j in range(9):
@@ -220,7 +222,7 @@ def solve_sudoku (puzzle, visualize = True):
     return False
 
 run = True
-
+correct = True
 while run:
 
     screen.fill((255, 255, 255))
@@ -251,9 +253,33 @@ while run:
 
                 initial = [[0 for _ in range(9)] for _ in range(9)]
                 user = [[0 for _ in range(9)] for _ in range(9)]
+                solution = [[0 for _ in range(9)] for _ in range(9)]
 
             elif is_check_button(pos):
-                correct = solve_sudoku(grid, False)
+                # correct = solve_sudoku(grid, False)
+                # correct = True
+                # for i in range(9):
+                #     for j in range(9):
+                #         if user[i][j]:
+                #             correct = is_valid(grid, grid[i][j], i, j
+                correct = True
+                # print('user: ')
+                # for row in user:
+                #     print(row)
+                # print('grid: ')
+                # for row in grid:
+                #     print(row)
+                # print('solution: ')
+                # for row in solution:
+                #     print(row)
+                if correct:
+                    for i in range(9):
+                        for j in range(9):
+                            if user[i][j] == 1:
+                                # print(grid[i][j] == solution[i][j])
+                                correct = (grid[i][j] == solution[i][j])
+                correct = correct and solve_sudoku(grid, False)
+
                 if correct:
                     draw_correctness("CORRECT", True)
                 else:
@@ -268,6 +294,7 @@ while run:
             
             elif is_import_button(pos):
                 import_puzzle()
+                correct = solve_sudoku(solution, False)
 
             elif is_grid(pos):
                 press_r, press_c = get_box(pos)
@@ -304,6 +331,8 @@ while run:
             elif event.key == pygame.K_9:
                 val = 9
             elif event.key == pygame.K_0:
+                val = 0
+            elif event.key == pygame.K_BACKSPACE:
                 val = 0
 
             if HIGHLIGHT and val!=-1:
