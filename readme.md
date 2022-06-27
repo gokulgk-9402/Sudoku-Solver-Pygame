@@ -21,3 +21,6 @@ The popular package - pygame <br/>
 * If you want to reset the board, you can click on the reset button.
 * You can again import using the import button/edit the data.txt file with a new puzzle and run everything again.
 
+## Updates:
+* Checking function improved
+* Added screenshots of pygame window - initial, after importing, checking correct, checking wrong, solving(backtracking step).
