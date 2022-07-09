@@ -256,27 +256,11 @@ while run:
                 solution = [[0 for _ in range(9)] for _ in range(9)]
 
             elif is_check_button(pos):
-                # correct = solve_sudoku(grid, False)
-                # correct = True
-                # for i in range(9):
-                #     for j in range(9):
-                #         if user[i][j]:
-                #             correct = is_valid(grid, grid[i][j], i, j
-                correct = True
-                # print('user: ')
-                # for row in user:
-                #     print(row)
-                # print('grid: ')
-                # for row in grid:
-                #     print(row)
-                # print('solution: ')
-                # for row in solution:
-                #     print(row)
+                correct = solve_sudoku(solution, False)
                 if correct:
                     for i in range(9):
                         for j in range(9):
-                            if user[i][j] == 1:
-                                # print(grid[i][j] == solution[i][j])
+                            if user[i][j]:
                                 correct = (grid[i][j] == solution[i][j])
                 correct = correct and solve_sudoku(grid, False)
 
@@ -294,7 +278,6 @@ while run:
             
             elif is_import_button(pos):
                 import_puzzle()
-                correct = solve_sudoku(solution, False)
 
             elif is_grid(pos):
                 press_r, press_c = get_box(pos)
